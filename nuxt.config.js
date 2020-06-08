@@ -1,3 +1,6 @@
+import path from 'path'
+import FMMode from 'frontmatter-markdown-loader/mode'
+
 export default {
   mode: 'universal',
   /*
@@ -49,9 +52,18 @@ export default {
    ** Build configuration
    */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {}
+    extend(config, _ctx) {
+      config.module.rules.push({
+        test: /\.md$/,
+        loader: 'frontmatter-markdown-loader',
+        include: path.resolve(__dirname, 'md'),
+        options: {
+          mode: [FMMode.VUE_COMPONENT],
+          vue: {
+            root: 'markdown-body'
+          }
+        }
+      })
+    }
   }
 }

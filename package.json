@@ -22,9 +22,10 @@
     }
   },
   "dependencies": {
-    "nuxt": "^2.0.0",
+    "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "@nuxtjs/dotenv": "^1.4.0"
+    "frontmatter-markdown-loader": "^3.5.0",
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
