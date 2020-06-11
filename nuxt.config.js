@@ -1,7 +1,17 @@
 import path from 'path'
 import FMMode from 'frontmatter-markdown-loader/mode'
 
+const routerBase =
+  process.env.DEPLOY_ENV === 'GH_PAGES'
+    ? {
+        router: {
+          base: '/cheat-sheet/'
+        }
+      }
+    : {}
+
 export default {
+  ...routerBase,
   mode: 'universal',
   /*
    ** Headers of the page

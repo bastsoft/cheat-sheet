@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import firstMd from '~/md/first.md'
+import firstMd from '~/md/gitlab-lhci.md'
 
 export default {
   components: {
