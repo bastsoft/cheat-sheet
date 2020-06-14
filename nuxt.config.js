@@ -1,5 +1,7 @@
 import path from 'path'
-import FMMode from 'frontmatter-markdown-loader/mode'
+import Mode from 'frontmatter-markdown-loader/mode'
+import MarkdownIt from 'markdown-it'
+import mip from 'markdown-it-prism'
 
 const routerBase =
   process.env.DEPLOY_ENV === 'GH_PAGES'
@@ -9,6 +11,12 @@ const routerBase =
         }
       }
     : {}
+
+const md = new MarkdownIt({
+  html: true,
+  typographer: true
+})
+md.use(mip)
 
 export default {
   ...routerBase,
@@ -36,7 +44,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['github-markdown-css'],
   /*
    ** Plugins to load before mounting the App
    */
@@ -68,9 +76,12 @@ export default {
         loader: 'frontmatter-markdown-loader',
         include: path.resolve(__dirname, 'md'),
         options: {
-          mode: [FMMode.VUE_COMPONENT],
+          mode: [Mode.VUE_RENDER_FUNCTIONS, Mode.VUE_COMPONENT],
           vue: {
-            root: 'markdown-body'
+            root: 'dynamicMarkdown'
+          },
+          markdown(body) {
+            return md.render(body)
           }
         }
       })

@@ -1,26 +1,32 @@
 <template>
   <div class="container">
-    <FirstMd></FirstMd>
+    <div v-for="item in blogs" :key="item.file">
+      {{ item }}
+      <nuxt-link :to="'/blog/' + item.file">{{ item.file }}</nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
-import firstMd from '~/md/gitlab-lhci.md'
-
 export default {
-  components: {
-    FirstMd: firstMd.vue.component
+  async asyncData({ app }) {
+    const generate = await import(`~/md/generate.json`)
+    const filesList = generate.default
+
+    async function asyncImport(blogName) {
+      const wholeMD = await import(`~/md/${blogName}`)
+      return { file: blogName.replace(/\.md/g, ''), ...wholeMD.attributes }
+    }
+
+    return Promise.all(filesList.map((blog) => asyncImport(blog))).then(
+      (res) => {
+        return {
+          blogs: res
+        }
+      }
+    )
   }
 }
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-</style>
+<style></style>

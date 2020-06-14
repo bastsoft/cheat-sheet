@@ -8,6 +8,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
+    "generate-md": "npx babel-node md/generate.mjs",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "test": "jest",
@@ -25,9 +26,13 @@
     }
   },
   "dependencies": {
+    "@babel/node": "^7.10.1",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "frontmatter-markdown-loader": "^3.5.0",
+    "github-markdown-css": "^4.0.0",
+    "markdown-it": "^11.0.0",
+    "markdown-it-prism": "^2.0.5",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
