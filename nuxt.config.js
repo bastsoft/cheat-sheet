@@ -2,6 +2,7 @@ import path from 'path'
 import Mode from 'frontmatter-markdown-loader/mode'
 import MarkdownIt from 'markdown-it'
 import mip from 'markdown-it-prism'
+import data from './md/data/generate.json'
 
 const routerBase =
   process.env.DEPLOY_ENV === 'GH_PAGES'
@@ -21,6 +22,11 @@ md.use(mip)
 export default {
   ...routerBase,
   mode: 'universal',
+
+  generate: {
+    routes: data.map((mdFileName) => '/blog/' + mdFileName.replace(/\.md/g, ''))
+  },
+
   /*
    ** Headers of the page
    */

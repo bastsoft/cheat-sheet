@@ -10,7 +10,7 @@
 <script>
 export default {
   async asyncData({ app }) {
-    const generate = await import(`~/md/generate.json`)
+    const generate = await import(`~/md/data/generate.json`)
     const filesList = generate.default
 
     async function asyncImport(blogName) {

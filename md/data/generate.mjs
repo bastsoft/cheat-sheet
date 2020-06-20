@@ -5,7 +5,7 @@ const jsonString = JSON.stringify(
   fs.readdirSync(testFolder).filter((file) => file.includes('.md'))
 )
 
-fs.writeFile('./md/generate.json', jsonString, (err) => {
+fs.writeFile('./md/data/generate.json', jsonString, (err) => {
   if (err) {
     console.log('Error writing file', err)
   } else {
